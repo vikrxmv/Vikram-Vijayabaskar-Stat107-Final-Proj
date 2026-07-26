@@ -1,0 +1,12 @@
+---
+title: "Data Analysis"
+author: "Vikram Vijayabaskar"
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+    embed-resources: true
+pagetitle: "UCR STAT107 Final Data Analysis Project - {{< meta title >}}"
+editor: visual
+---
