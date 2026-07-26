@@ -10,3 +10,41 @@ format:
 pagetitle: "UCR STAT107 Final Data Analysis Project - {{< meta title >}}"
 editor: visual
 ---
+
+# Introduction {.unnumbered}
+
+## Introducing the data
+
+The data set I will be using is the Pokemon Go evolution data set. It includes 75 Pokemon evolutions and around 27 variables, as well as information about each Pokemon before and after evolution (combat power, hit points, size, power up costs, etc). Evolution in Pokemon means a Pokemon is growing stronger, thus, in this project, I'll be analyzing/predicting post evolution combat power.
+
+## Code Book
+
+(All descriptions are from the readme attached to the dataset)
+
+| Variable | Description | Why it is used |
+|----|----|----|
+| `species` | The Pokémon's type, e.g. Pidgey. | I use this variable to compare whether CP (combat power) differs between species |
+| `cp` | Pre-evolution Combat Power, which is a summary of the Pokémon's strength for battling prior to the evolution of the Pokémon. | This is the main variable I will be using to predict. |
+| `cp_new` | Post-evolution Combat Power. | This is the main variable I will be PREDICTING. |
+| `hp` | Pre-evolution Hit Points, which is a summary of how difficult it is to weaken the Pokémon in a battle. | I use this variable for background summary statistics |
+| `hp_new` | Post-evolution Hit Points. | I use this for comparing background statistics after evolution. |
+
+## Omitted Variables
+
+I will not be omitting any variables from the data set, HOWEVER, my main model will only be focusing on the variables that directly answer my research question. The model focuses on `cp_new`, `cp`, and the other variables left in the code book. Other variables in the data set such as `attack`, `attack types`, `weight`, `height`, and more aren't included in the main regression model because they are not integral to our research question and might skew the data.
+
+## Motivation
+
+As a kid growing up with Pokemon because of an older brother, who was much more fascinated by the stats of Pokemon because he wanted the strongest team possible, I was interested in being able to predict whether or not I can tell a Pokemon is going to have a strong evolution simply based off its pre-evolution, therefore (even though I personally don't play Pokemon anymore) I could decide which Pokemon I would want based off their pre-evolution and end up with the strongest team I could have. Some background information that suggests that there's reason to investigate this is because sometimes some Pokemon have very weak pre-evolutions that evolve into very strong Pokemon, I want to be able to predict that.
+
+## Research Question
+
+My research question is: Can we predict a Pokemon's post evolution combat power using it's pre-evolution combat power, and does this relationship differ by species?
+
+## Hypothesis
+
+My hypotheses are
+
+$H_0$ - Pre-evolution Combat Power is not associated with Post-Evolution Combat Power.
+
+$H_A$ - Higher Pre-Evolution Combat Power is associated with higher Post-Evolution Combat Power.
