@@ -19,7 +19,7 @@ The data set I will be using is the Pokemon Go evolution data set. It includes 7
 
 ## Code Book
 
-(All descriptions are from the readme attached to the dataset)
+(All descriptions are from the readme attached to the data set)
 
 | Variable | Description | Why it is used |
 |------------------------|------------------------|------------------------|
@@ -53,7 +53,7 @@ $H_A$ - Higher Pre-Evolution Combat Power is associated with higher Post-Evoluti
 
 ## Preliminary Summaries
 
-Before diving into models, I will summarize the data by finding the total sample size, the number of variables, and summary statistics for the main outcome, which is the variable `cp_new`. I will also find the number of Pokemon in each `species` group. This shows how much ndata is available for each each species before comparing models
+Before diving into models, I will summarize the data by finding the total sample size, the number of variables, and summary statistics for the main outcome, which is the variable `cp_new`. I will also find the number of Pokemon in each `species` group. This shows how much data is available for each each species before comparing models
 
 ## Main Model
 
@@ -72,7 +72,9 @@ The main figure of this analysis will be a scatter plot of `cp_new` versus `cp`,
 
 The assumption the model takes is that the relationship between `cp` and `cp_new` is approximately linear, observations are independent, residual variance is roughly constant, and that the residuals are normal. I will check these assumptions during my analysis but the report will focus on the main figure.
 
-##Software and functions I will be using I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I will also use `lm()` to fit the regression model, `summary()` to view model results, and `ggplot2` to create the figure.
+## Software and functions
+
+I will be using I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I will also use `lm()` to fit the regression model, `summary()` to view model results, and `ggplot2` to create the figure.
 
 # Results
 
@@ -157,21 +159,22 @@ pokemon_go |>
        color = "Species",
        title = "Post-Evolution CP by Pre-Evolution CP")
 ```
+
 ## Final Analysis
 
-Thia figure shows a strong positive relationship between pre-evolution CP and post-evolution CP. Overall, the Pokemon with the higher CP befroe evolution also have higher CP after evolution, which supports the idea that pre-evolution CP is.a useful predictor of post-evolution of CP.
+This figure shows a strong positive relationship between pre-evolution CP and post-evolution CP. Overall, the Pokemon with the higher CP before evolution also have higher CP after evolution, which supports the idea that pre-evolution CP is.a useful predictor of post-evolution of CP.
 
-The figure suggests that species matters. Eevee is shown to have a much higher CP value than other species. Pidgey has a higher trend than both Weedle and Caterpie, which share similar CP values. 
+The figure suggests that species matters. Eevee is shown to have a much higher CP value than other species. Pidgey has a higher trend than both Weedle and Caterpie, which share similar CP values.
 
 Based off this figure, we have reason to believe this relationship because the trend clearly point in an upward trend which is expected in post-evolution CP values.
 
-Overall, this result supports the hypothesis that higher pre-evolution CP is associated with higher post-evolution CP. Aswell as this, it suggests that the relationship is different per species so including the interaction between `cp` and `species` is useful.
+Overall, this result supports the hypothesis that higher pre-evolution CP is associated with higher post-evolution CP. As well as this, it suggests that the relationship is different per species so including the interaction between `cp` and `species` is useful.
 
 # Discussion
 
 The results support my hypothesis that Pokemon with higher pre-evolution CP usually also have higher post-evolution CP.
 
-Species is shown to be important because the CP patter is different amongst different Pokemon species. An example of this is Eevee having much higher CP values than Caterpie and Weedle.
+Species is shown to be important because the CP patter is different among different Pokemon species. An example of this is Eevee having much higher CP values than Caterpie and Weedle.
 
 This finding is useful because players may use pre-evolution CP ot help decide which Pokemon are worth evolving and keeping.
 

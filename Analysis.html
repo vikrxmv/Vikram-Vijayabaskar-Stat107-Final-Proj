@@ -2362,6 +2362,7 @@ window.Quarto = {
   <li><a href="#main-model" id="toc-main-model" class="nav-link" data-scroll-target="#main-model">Main Model</a></li>
   <li><a href="#main-figure" id="toc-main-figure" class="nav-link" data-scroll-target="#main-figure">Main Figure</a></li>
   <li><a href="#model-assumptions" id="toc-model-assumptions" class="nav-link" data-scroll-target="#model-assumptions">Model assumptions</a></li>
+  <li><a href="#software-and-functions" id="toc-software-and-functions" class="nav-link" data-scroll-target="#software-and-functions">Software and functions</a></li>
   </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
   <ul class="collapse">
@@ -2412,7 +2413,7 @@ window.Quarto = {
 </section>
 <section id="code-book" class="level2">
 <h2 class="anchored" data-anchor-id="code-book">Code Book</h2>
-<p>(All descriptions are from the readme attached to the dataset)</p>
+<p>(All descriptions are from the readme attached to the data set)</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -2478,7 +2479,7 @@ window.Quarto = {
 <h1>Methods</h1>
 <section id="preliminary-summaries" class="level2">
 <h2 class="anchored" data-anchor-id="preliminary-summaries">Preliminary Summaries</h2>
-<p>Before diving into models, I will summarize the data by finding the total sample size, the number of variables, and summary statistics for the main outcome, which is the variable <code>cp_new</code>. I will also find the number of Pokemon in each <code>species</code> group. This shows how much ndata is available for each each species before comparing models</p>
+<p>Before diving into models, I will summarize the data by finding the total sample size, the number of variables, and summary statistics for the main outcome, which is the variable <code>cp_new</code>. I will also find the number of Pokemon in each <code>species</code> group. This shows how much data is available for each each species before comparing models</p>
 </section>
 <section id="main-model" class="level2">
 <h2 class="anchored" data-anchor-id="main-model">Main Model</h2>
@@ -2494,7 +2495,10 @@ window.Quarto = {
 <section id="model-assumptions" class="level2">
 <h2 class="anchored" data-anchor-id="model-assumptions">Model assumptions</h2>
 <p>The assumption the model takes is that the relationship between <code>cp</code> and <code>cp_new</code> is approximately linear, observations are independent, residual variance is roughly constant, and that the residuals are normal. I will check these assumptions during my analysis but the report will focus on the main figure.</p>
-<p>##Software and functions I will be using I’ll be using <code>tidyverse</code> for data cleaning, summary tables, and graphics. I will also use <code>lm()</code> to fit the regression model, <code>summary()</code> to view model results, and <code>ggplot2</code> to create the figure.</p>
+</section>
+<section id="software-and-functions" class="level2">
+<h2 class="anchored" data-anchor-id="software-and-functions">Software and functions</h2>
+<p>I will be using I’ll be using <code>tidyverse</code> for data cleaning, summary tables, and graphics. I will also use <code>lm()</code> to fit the regression model, <code>summary()</code> to view model results, and <code>ggplot2</code> to create the figure.</p>
 </section>
 </section>
 <section id="results" class="level1">
@@ -2670,16 +2674,16 @@ F-statistic:  1364 on 7 and 67 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="final-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="final-analysis">Final Analysis</h2>
-<p>Thia figure shows a strong positive relationship between pre-evolution CP and post-evolution CP. Overall, the Pokemon with the higher CP befroe evolution also have higher CP after evolution, which supports the idea that pre-evolution CP is.a useful predictor of post-evolution of CP.</p>
+<p>This figure shows a strong positive relationship between pre-evolution CP and post-evolution CP. Overall, the Pokemon with the higher CP before evolution also have higher CP after evolution, which supports the idea that pre-evolution CP is.a useful predictor of post-evolution of CP.</p>
 <p>The figure suggests that species matters. Eevee is shown to have a much higher CP value than other species. Pidgey has a higher trend than both Weedle and Caterpie, which share similar CP values.</p>
 <p>Based off this figure, we have reason to believe this relationship because the trend clearly point in an upward trend which is expected in post-evolution CP values.</p>
-<p>Overall, this result supports the hypothesis that higher pre-evolution CP is associated with higher post-evolution CP. Aswell as this, it suggests that the relationship is different per species so including the interaction between <code>cp</code> and <code>species</code> is useful.</p>
+<p>Overall, this result supports the hypothesis that higher pre-evolution CP is associated with higher post-evolution CP. As well as this, it suggests that the relationship is different per species so including the interaction between <code>cp</code> and <code>species</code> is useful.</p>
 </section>
 </section>
 <section id="discussion" class="level1">
 <h1>Discussion</h1>
 <p>The results support my hypothesis that Pokemon with higher pre-evolution CP usually also have higher post-evolution CP.</p>
-<p>Species is shown to be important because the CP patter is different amongst different Pokemon species. An example of this is Eevee having much higher CP values than Caterpie and Weedle.</p>
+<p>Species is shown to be important because the CP patter is different among different Pokemon species. An example of this is Eevee having much higher CP values than Caterpie and Weedle.</p>
 <p>This finding is useful because players may use pre-evolution CP ot help decide which Pokemon are worth evolving and keeping.</p>
 <p>One limitation of the date that is shown is that the data only has 75 evolutions and only 4 species, so the results may not apply to all Pokemon. A better future analysis would include a data set with more species.</p>
 </section>
