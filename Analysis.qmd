@@ -74,4 +74,40 @@ The assumption the model takes is that the relationship between `cp` and `cp_new
 ##Software and functions I will be using
 I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I will also use `lm()` to fit the regression model, `summary()` to view model results, and `ggplot2` to create the figure.
 
+# Results
+
+```{r}
+#loading packages
+library(tidyverse)
+```
+```{r}
+#load data
+pokemon_go <- read_csv("pokemon_go.csv")
+
+#clean variables
+pokemon_go <- pokemon_go |>
+  mutate(species = factor(species))
+```
+# Data Summary
+```{r}
+pokemon_go |>
+  summarize(n_rows = n(),
+            n_variables = ncol(pokemon_go),
+            mean_cp_new = mean(cp_new),
+            sd_cp_new = sd(cp_new),
+            median_cp_new = median(cp_new),
+            iqr_cp_new = IQR(cp_new))
+```
+```{r}
+#counts the amount of each species
+pokemon_go |>
+  count(species)
+```
+## Fitting
+
+```{r}
+main_model <- lm(cp_new ~ cp + species, data = pokemon_go)
+
+summary(main_model)
+```
 
