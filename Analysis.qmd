@@ -22,7 +22,7 @@ The data set I will be using is the Pokemon Go evolution data set. It includes 7
 (All descriptions are from the readme attached to the dataset)
 
 | Variable | Description | Why it is used |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | `species` | The Pokémon's type, e.g. Pidgey. | I use this variable to compare whether CP (combat power) differs between species |
 | `cp` | Pre-evolution Combat Power, which is a summary of the Pokémon's strength for battling prior to the evolution of the Pokémon. | This is the main variable I will be using to predict. |
 | `cp_new` | Post-evolution Combat Power. | This is the main variable I will be PREDICTING. |
@@ -48,3 +48,30 @@ My hypotheses are
 $H_0$ - Pre-evolution Combat Power is not associated with Post-Evolution Combat Power.
 
 $H_A$ - Higher Pre-Evolution Combat Power is associated with higher Post-Evolution Combat Power.
+
+# Methods
+
+## Preliminary Summaries
+
+Before diving into models, I will summarize the data by finding the total sample size, the number of variables, and summary statistics for the main outcome, which is the variable `cp_new`. I will also find the number of Pokemon in each `species` group. This shows how much ndata is available for each each species before comparing models
+
+## Main Model
+
+The main method I will be using for this project/analysis is linear regression.
+
+$cp\_new = \beta_0 + \beta_1cp + \beta_2species + \epsilon$
+
+This model lets me test whether pre-evolution CP is associated with post-evolution CP while also accounting for differences between Pokemon species.
+
+## Main Figure
+
+The main figure of this analysis will be a scatterplot of `cp_new` versus `cp`, colored by `species`, with a fitted regression line. This figure shows us the relationship between the two variables we are comparing, pre-evolution CP and post-evolution CP.
+
+## Model assumptions
+
+The assumption the model takes is that the relationship between `cp` and `cp_new` is approximately linear, observations are independent, residual variance is roughly constant, and that the residuals are normal. I will check these assumptions during my analysis but the report will focus on the main figure.
+
+##Software and functions I will be using
+I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I will also use `lm()` to fit the regression model, `summary()` to view model results, and `ggplot2` to create the figure.
+
+
