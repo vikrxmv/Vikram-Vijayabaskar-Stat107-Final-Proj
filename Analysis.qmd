@@ -15,7 +15,7 @@ editor: visual
 
 ## Introducing the data
 
-The data set I will be using is the Pokemon Go evolution data set. It includes 75 Pokemon evolutions and around 27 variables, as well as information about each Pokemon before and after evolution (combat power, hit points, size, power up costs, etc). Evolution in Pokemon means a Pokemon is growing stronger, thus, in this project, I'll be analyzing/predicting post evolution combat power.
+The data set I will be using is the Pokemon Go evolution data set. It includes 75 Pokemon evolutions (across 4 species) and around 27 variables, as well as information about each Pokemon before and after evolution (combat power, hit points, size, power up costs, etc). Evolution in Pokemon means a Pokemon is growing stronger, thus, in this project, I'll be analyzing/predicting post evolution combat power.
 
 ## Code Book
 
@@ -59,20 +59,20 @@ Before diving into models, I will summarize the data by finding the total sample
 
 The main method I will be using for this project/analysis is linear regression.
 
-$cp\_new = \beta_0 + \beta_1cp + \beta_2species + \epsilon$
+$cp\_new = \beta_0 + \beta_1cp + \beta_2species +
+\beta_3(cp \times species) + \epsilon$
 
 This model lets me test whether pre-evolution CP is associated with post-evolution CP while also accounting for differences between Pokemon species.
 
 ## Main Figure
 
-The main figure of this analysis will be a scatterplot of `cp_new` versus `cp`, colored by `species`, with a fitted regression line. This figure shows us the relationship between the two variables we are comparing, pre-evolution CP and post-evolution CP.
+The main figure of this analysis will be a scatter plot of `cp_new` versus `cp`, colored by `species`, with a fitted regression line. This figure shows us the relationship between the two variables we are comparing, pre-evolution CP and post-evolution CP.
 
 ## Model assumptions
 
 The assumption the model takes is that the relationship between `cp` and `cp_new` is approximately linear, observations are independent, residual variance is roughly constant, and that the residuals are normal. I will check these assumptions during my analysis but the report will focus on the main figure.
 
-##Software and functions I will be using
-I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I will also use `lm()` to fit the regression model, `summary()` to view model results, and `ggplot2` to create the figure.
+##Software and functions I will be using I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I will also use `lm()` to fit the regression model, `summary()` to view model results, and `ggplot2` to create the figure.
 
 # Results
 
@@ -80,6 +80,7 @@ I'll be using `tidyverse` for data cleaning, summary tables, and graphics. I wil
 #loading packages
 library(tidyverse)
 ```
+
 ```{r}
 #load data
 pokemon_go <- read_csv("pokemon_go.csv")
@@ -88,7 +89,9 @@ pokemon_go <- read_csv("pokemon_go.csv")
 pokemon_go <- pokemon_go |>
   mutate(species = factor(species))
 ```
-# Data Summary
+
+## Data Summary
+
 ```{r}
 pokemon_go |>
   summarize(n_rows = n(),
@@ -98,16 +101,78 @@ pokemon_go |>
             median_cp_new = median(cp_new),
             iqr_cp_new = IQR(cp_new))
 ```
+
 ```{r}
 #counts the amount of each species
 pokemon_go |>
   count(species)
 ```
+
 ## Fitting
 
 ```{r}
-main_model <- lm(cp_new ~ cp + species, data = pokemon_go)
+main_model <- lm(cp_new ~ cp * species, data = pokemon_go)
 
 summary(main_model)
 ```
 
+## Making Model Table
+
+```{r}
+#model table
+model_table <- coef(summary(main_model)) |>
+  as.data.frame() |>
+  rownames_to_column("term") |>
+  as_tibble()
+
+model_table <- model_table |>
+  rename(estimate =  Estimate,
+         std_error = `Std. Error`,
+         t_value = `t value`,
+         p_value = `Pr(>|t|)`)
+
+model_table
+```
+
+```{r}
+#model fit
+
+model_fit <- tibble(
+  r_squared = summary(main_model)$r.squared,
+  adj_r_squared = summary(main_model)$adj.r.squared
+)
+
+model_fit
+```
+
+## Scatter Plot Figure
+
+```{r}
+pokemon_go |>
+  ggplot(aes(x = cp, y = cp_new, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Pre-Evolution CP",
+       y = "Post-Evolution CP",
+       color = "Species",
+       title = "Post-Evolution CP by Pre-Evolution CP")
+```
+## Final Analysis
+
+Thia figure shows a strong positive relationship between pre-evolution CP and post-evolution CP. Overall, the Pokemon with the higher CP befroe evolution also have higher CP after evolution, which supports the idea that pre-evolution CP is.a useful predictor of post-evolution of CP.
+
+The figure suggests that species matters. Eevee is shown to have a much higher CP value than other species. Pidgey has a higher trend than both Weedle and Caterpie, which share similar CP values. 
+
+Based off this figure, we have reason to believe this relationship because the trend clearly point in an upward trend which is expected in post-evolution CP values.
+
+Overall, this result supports the hypothesis that higher pre-evolution CP is associated with higher post-evolution CP. Aswell as this, it suggests that the relationship is different per species so including the interaction between `cp` and `species` is useful.
+
+# Discussion
+
+The results support my hypothesis that Pokemon with higher pre-evolution CP usually also have higher post-evolution CP.
+
+Species is shown to be important because the CP patter is different amongst different Pokemon species. An example of this is Eevee having much higher CP values than Caterpie and Weedle.
+
+This finding is useful because players may use pre-evolution CP ot help decide which Pokemon are worth evolving and keeping.
+
+One limitation of the date that is shown is that the data only has 75 evolutions and only 4 species, so the results may not apply to all Pokemon. A better future analysis would include a data set with more species.
